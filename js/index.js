@@ -69,26 +69,38 @@ function renderGreenPeppers() {
 function renderWhiteSauce() {
   // Iteration 2: add/remove the class "sauce-white" of `<section class="sauce">`
   const sauceNode = document.getElementsByClassName('sauce')[0];
-  if (sauceNode.classList.contains('sauce-white')) {
-    sauceNode.classList.remove('sauce-white');
-  }
-  else {
+  if (state.whiteSauce && !sauceNode.classList.contains('sauce-white')) {
     sauceNode.classList.add('sauce-white');
+  }
+  if (!state.whiteSauce && sauceNode.classList.contains('sauce-white')) {
+    sauceNode.classList.remove('sauce-white');
   }
 }
 
 function renderGlutenFreeCrust() {
   // Iteration 2: add/remove the class "crust-gluten-free" of `<section class="crust">`
   const crustNode = document.getElementsByClassName('crust')[0];
-  if (crustNode.classList.contains('crust')) {
-    crustNode.classList.remove('crust-glute-free');
-  } else {
-    crustNode.classList.add('crust-glute-free');
+  if (state.glutenFreeCrust && !crustNode.classList.contains('crust-gluten-free')) {
+    crustNode.classList.add('crust-gluten-free');
+  }
+  if (!state.glutenFreeCrust && crustNode.classList.contains('crust-gluten-free')) {
+    crustNode.classList.remove('crust-gluten-free');
   }
 }
 
 function renderButtons() {
   // Iteration 3: add/remove the class "active" of each `<button class="btn">`
+  const buttons = document.getElementsByClassName('btn');
+  let counter = 0;
+  for (let property in state) {
+    if (state[property] && !buttons[counter].classList.contains('active')) {
+      buttons[counter].classList.add('active');
+    } 
+    if (!state[property] && buttons[counter].classList.contains('active')) {
+      buttons[counter].classList.remove('active');
+    }
+    counter++;
+  }
 }
 
 function renderPrice() {
