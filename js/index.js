@@ -105,6 +105,26 @@ function renderButtons() {
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
+  const addedIngredients = document.querySelectorAll('aside > ul > li');
+  const totalPriceNode = document.querySelectorAll('aside > strong')[0];
+  let totalPrice = 10;
+  let counter = 0;
+  for (let property in state) {
+    if (state[property]) {
+      addedIngredients[counter].style.visibility = 'visible';
+      if (property === 'whiteSauce') {
+        totalPrice += 3;
+      } else if (property === 'glutenFreeCrust') {
+        totalPrice += 5;
+      } else {
+        totalPrice += 1;
+      }
+    } else {
+      addedIngredients[counter].style.visibility = 'hidden';
+    }
+    counter++;
+  }
+  totalPriceNode.innerHTML = `$${totalPrice}`;
 }
 
 renderEverything();
